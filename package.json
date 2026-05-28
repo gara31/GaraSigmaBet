@@ -1,12 +1,13 @@
 {
-  "name": "@whiskeysockets/baileys",
+  "name": "Gara-baileys",
   "version": "7.0.0-rc.9",
+  "author": "gara31",
   "type": "module",
   "main": "lib/index.js",
   "scripts": {
     "format": "prettier --write"
   },
-  "description": "Lightweight build of Baileys",
+  "description": "Gara Custom Baileys - Full Button Support",
   "dependencies": {
     "@cacheable/node-cache": "^1.4.0",
     "@hapi/boom": "^9.1.3",
