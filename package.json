@@ -1,6 +1,6 @@
 {
   "name": "gara-baileys",
-  "version": "7.0.0-rc.11",
+  "version": "7.0.0-rc.12",
   "author": "gara31",
   "type": "module",
   "main": "lib/index.js",
