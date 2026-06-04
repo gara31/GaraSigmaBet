@@ -7,7 +7,7 @@
   "scripts": {
     "format": "prettier --write"
   },
-  "description": "Gara Custom Baileys - Full Button Support",
+  "description": "Simple Baileys",
   "dependencies": {
     "@cacheable/node-cache": "^1.4.0",
     "@hapi/boom": "^9.1.3",
