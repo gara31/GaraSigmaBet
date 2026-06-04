@@ -4,6 +4,10 @@
   "author": "gara31",
   "type": "module",
   "main": "lib/index.js",
+  "files": [
+    "lib/",
+    "WAProto/index.js"
+  ],
   "scripts": {
     "format": "prettier --write"
   },
@@ -25,3 +29,4 @@
     "prettier": "^3.6.2"
   }
 }
+
