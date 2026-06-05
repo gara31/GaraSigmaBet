@@ -1,5 +1,5 @@
 {
-  "name": "gara-baileys",
+  "name": "@gara31/void-baileys",
   "version": "7.0.0-rc.15",
   "author": "gara31",
   "type": "module",
@@ -29,4 +29,3 @@
     "prettier": "^3.6.2"
   }
 }
-
