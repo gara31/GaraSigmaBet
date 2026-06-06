@@ -1,6 +1,6 @@
 {
   "name": "@gara31/void-baileys",
-  "version": "7.0.0-rc.10",
+  "version": "7.0.0-rc.11",
   "author": "gara31",
   "type": "module",
   "main": "lib/index.js",
