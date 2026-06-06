@@ -4,6 +4,24 @@
   "author": "gara31",
   "type": "module",
   "main": "lib/index.js",
+  "description": "Modded Baileys v7 — Interactive Messages, Album, AI Rich Response & More",
+  "keywords": [
+    "whatsapp",
+    "whatsapp-api",
+    "whatsapp-web",
+    "whatsapp-bot",
+    "whatsapp-chat",
+    "baileys",
+    "baileys-fork",
+    "void-baileys",
+    "wabot",
+    "botwa",
+    "interactive-messages",
+    "album",
+    "communities",
+    "rich-response",
+    "newsletter"
+  ],
   "files": [
     "lib/",
     "WAProto/index.js"
@@ -11,7 +29,6 @@
   "scripts": {
     "format": "prettier --write"
   },
-  "description": "Simple Baileys",
   "dependencies": {
     "@cacheable/node-cache": "^1.4.0",
     "@hapi/boom": "^9.1.3",
