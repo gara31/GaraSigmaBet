@@ -9,7 +9,6 @@
 [![npm version](https://img.shields.io/npm/v/@gara31/void-baileys?color=CB3837&logo=npm&logoColor=white&style=for-the-badge)](https://www.npmjs.com/package/@gara31/void-baileys)
 [![npm downloads](https://img.shields.io/npm/dm/@gara31/void-baileys?color=CB3837&logo=npm&logoColor=white&style=for-the-badge)](https://www.npmjs.com/package/@gara31/void-baileys)
 [![License](https://img.shields.io/badge/license-MIT-blue?style=for-the-badge)](LICENSE)
-[![Node](https://img.shields.io/badge/node-%3E%3D20.0.0-339933?logo=node.js&logoColor=white&style=for-the-badge)](https://nodejs.org)
 [![ESM](https://img.shields.io/badge/ESM-only-F7DF1E?logo=javascript&logoColor=black&style=for-the-badge)](#)
 
 ---
@@ -81,6 +80,8 @@ Berisi file runtime yang sudah dikompilasi di `lib/` dan protobuf di `WAProto/`,
 
 ## 📦 Instalasi
 
+### Via Terminal (langsung)
+
 ```bash
 npm install @gara31/void-baileys
 ```
@@ -91,7 +92,41 @@ Package pendamping yang disarankan:
 npm install pino qrcode-terminal
 ```
 
-### Menggunakan Alias
+### Via package.json — Fork Baileys
+
+Jika proyekmu menggunakan fork dari `@whiskeysockets/baileys` atau `@adiwajshing/baileys`, tambahkan alias berikut ke `package.json`:
+
+**Fork `@whiskeysockets/baileys`**
+```json
+{
+  "dependencies": {
+    "@whiskeysockets/baileys": "npm:@gara31/void-baileys"
+  }
+}
+```
+
+**Fork `@adiwajshing/baileys`**
+```json
+{
+  "dependencies": {
+    "@adiwajshing/baileys": "npm:@gara31/void-baileys"
+  }
+}
+```
+
+Lalu jalankan:
+
+```bash
+npm install
+```
+
+### Via Terminal — Non Fork (alias custom)
+
+```bash
+npm install void-bail@npm:@gara31/void-baileys
+```
+
+### Menggunakan Alias (generic)
 
 Tambahkan ke `package.json`:
 
@@ -405,6 +440,162 @@ kataSalam("Void")`,
     footer: 'Powered by Void',
   }
 )
+```
+
+### Rich Message
+
+```js
+// Teks & Markdown
+await sock.sendMessage(jid, {
+  richMessage: {
+    title: 'vøid',
+    text: `# Halo Dunia\n## GARA\n\n---\n\n=={ Yellow Text }==\n\n---\n\n[Google](https://google.com)\n\n[](https://openai.com)\n\n[Shiroko|1429|1897]<https://example.com/image.png>`,
+  }
+}, { quoted: m })
+
+// Tip / Metadata Text
+await sock.sendMessage(jid, {
+  richMessage: {
+    title: 'vøid',
+    tip: 'Ini adalah text tip (Metadata Text)',
+  }
+}, { quoted: m })
+
+// Produk
+await sock.sendMessage(jid, {
+  richMessage: {
+    title: 'vøid',
+    product: [
+      {
+        title: 'Nama Produk',
+        brand: 'GARA',
+        price: 'Rp 1000',
+        sale_price: 'Rp 0',
+        url: 'https://wa.me/628xxx',
+        icon: 'https://example.com/icon.png',
+        image: 'https://example.com/image.jpg',
+      }
+    ],
+  }
+}, { quoted: m })
+
+// Code Block
+await sock.sendMessage(jid, {
+  richMessage: {
+    title: 'vøid',
+    code: {
+      language: 'javascript',
+      code: `class GARA {\n\tstatic hello() {\n\t\treturn 'Hello World';\n\t}\n}`,
+    },
+  }
+}, { quoted: m })
+
+// Tabel
+await sock.sendMessage(jid, {
+  richMessage: {
+    title: 'vøid',
+    table: [
+      ['Nama', 'Role'],
+      ['GARA', 'Developer'],
+      ['Fiora Sylvie', 'Assistant'],
+    ],
+  }
+}, { quoted: m })
+
+// Source / Sumber
+await sock.sendMessage(jid, {
+  richMessage: {
+    title: 'vøid',
+    source: [
+      ['https://example.com/favicon.jpg', 'https://github.com/gara31/', 'GitHub'],
+      ['https://example.com/favicon.jpg', 'https://example.com/', 'Website'],
+    ],
+  }
+}, { quoted: m })
+
+// Gambar
+await sock.sendMessage(jid, {
+  richMessage: {
+    title: 'vøid',
+    image: 'https://example.com/image.jpg',
+  }
+}, { quoted: m })
+
+// Video
+await sock.sendMessage(jid, {
+  richMessage: {
+    title: 'vøid',
+    video: 'https://example.com/video.mp4|10', // url|durasi(detik)
+  }
+}, { quoted: m })
+
+// Reels
+await sock.sendMessage(jid, {
+  richMessage: {
+    title: 'vøid',
+    reels: [
+      {
+        username: 'GARA',
+        profile_url: 'https://example.com/avatar.jpg',
+        thumbnail: 'https://example.com/thumb.jpg',
+        url: 'https://example.com/',
+        title: 'Demo Reel',
+        like: 12000,
+        share: 500,
+        view: 999999,
+        source: 'IG',
+        verified: true,
+      }
+    ],
+  }
+}, { quoted: m })
+
+// Post
+await sock.sendMessage(jid, {
+  richMessage: {
+    title: 'vøid',
+    post: [
+      {
+        profile_url: 'https://example.com/avatar.jpg',
+        username: 'GARA',
+        title: 'Demo Post',
+        subtitle: 'vøid',
+        caption: 'Caption post disini.',
+        verified: true,
+        url: 'https://example.com/',
+        thumbnail: 'https://example.com/thumb.jpg',
+        source: 'INSTAGRAM',
+        footer: 'vøid',
+        deeplink: 'https://example.com/',
+        icon: 'https://example.com/icon.jpg',
+        orientation: 'LANDSCAPE',
+        post_type: 'PHOTO',
+        comment: 1,
+        share: 1,
+        like: 1,
+      }
+    ],
+  }
+}, { quoted: m })
+
+// Suggest / Pill
+await sock.sendMessage(jid, {
+  richMessage: {
+    title: 'vøid',
+    suggest: ['GARA', 'vøid', 'Fiora Sylvie'],
+  }
+}, { quoted: m })
+
+// Gabungan (video + tip + suggest + text)
+await sock.sendMessage(jid, {
+  richMessage: {
+    title: 'vøid',
+    video: 'https://example.com/video.mp4|10',
+    tip: 'Ini adalah text tip',
+    suggest: ['gara', 'void', 'yuuki'],
+    text: `- [Beli Script](https://wa.me/628xxx)\n- [Sewa Bot](https://wa.me/628xxx)\n- [Support](https://wa.me/628xxx)`,
+  }
+}, { quoted: m })
 ```
 
 ### Metode Newsletter
