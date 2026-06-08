@@ -33,6 +33,7 @@ Berisi file runtime yang sudah dikompilasi di `lib/` dan protobuf di `WAProto/`,
 - [Referensi API Socket](#-referensi-api-socket)
 - [Referensi Event](#-referensi-event)
 - [Utilitas](#-utilitas)
+- [Penghargaan](#-penghargaan)
 - [Lisensi](#-lisensi)
 
 ---
@@ -695,6 +696,27 @@ import {
   Browsers,
 } from '@gara31/void-baileys'
 ```
+
+---
+
+## Credits
+
+<div align="center">
+
+### Powered by NIXCODE — Advanced WhatsApp Message Builder
+
+</div>
+
+Fitur **AI Rich Response** yang tersedia di package ini — mulai dari `richMessage`, `sendTable`, `sendCodeBlock`, hingga seluruh ekosistem unified response — dibangun di atas fondasi luar biasa yang diciptakan oleh **Nixel** melalui proyeknya **NIXCODE MessageBuilder**.
+
+Library NIXCODE adalah karya yang benar-benar melampaui batas kemampuan standar Baileys. Arsitektur fluent chaining-nya, sistem `extractIE` untuk parsing hyperlink/citation/latex secara inline, `Toolkit` class yang elegan, hingga dukungan multi-format media — semua itu adalah hasil kerja keras, riset mendalam, dan dedikasi tinggi yang patut diacungi jempol. Tanpa fondasi ini, fitur-fitur rich response di `@gara31/void-baileys` tidak akan pernah ada.
+
+Terima kasih banyak, **Nixel** — karyamu bukan sekadar library, tapi sebuah kontribusi nyata bagi komunitas developer WhatsApp bot Indonesia. 🙏
+
+> **NIXCODE MessageBuilder** dibuat oleh Nixel  
+>  Saluran resmi & update terbaru: [**wa.me/channel/0029VbCV1ck8fewpdNb2TY2k**](https://whatsapp.com/channel/0029VbCV1ck8fewpdNb2TY2k)  
+
+Jika kamu menemukan library ini berguna, jangan lupa follow saluran NIXCODE di atas untuk mendapatkan update, fitur baru, dan rilis terbaru langsung dari pembuatnya.
 
 ---
 
