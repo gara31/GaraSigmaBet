@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/gara31/void-md/main/uploads/1778931942943_ajzmir7fupi.jpg" alt="void-baileys banner" width="100%" />
+<img src="https://c.termai.cc/i135/QkXlhm4.jpg" alt="void-baileys banner" width="100%" />
 
 # @gara31/void-baileys
 
@@ -248,6 +248,236 @@ sock.ev.on('connection.update', async ({ connection }) => {
     const code = await sock.requestPairingCode('628xxxxxxxxx')
     console.log('Pairing code:', code)
   }
+})
+```
+
+---
+
+## 📨 Membaca Pesan Pengguna
+
+Saat menerima pesan via `messages.upsert`, gunakan `getContentType` dan `normalizeMessageContent` untuk mendeteksi tipe dan isi pesan.
+
+### Setup Awal
+
+```js
+import {
+  getContentType,
+  normalizeMessageContent,
+  downloadMediaMessage,
+} from '@gara31/void-baileys'
+
+sock.ev.on('messages.upsert', async ({ messages }) => {
+  const msg = messages[0]
+  if (!msg?.message || msg.key.fromMe) return
+
+  const jid = msg.key.remoteJid
+  const content = normalizeMessageContent(msg.message) // handle viewOnce, ephemeral, dll
+  const type = getContentType(content)
+
+  // Ambil teks dari tipe apapun
+  const text =
+    content?.conversation ||
+    content?.extendedTextMessage?.text ||
+    content?.imageMessage?.caption ||
+    content?.videoMessage?.caption ||
+    content?.documentMessage?.caption ||
+    ''
+})
+```
+
+---
+
+### Text Message
+
+```js
+if (type === 'conversation' || type === 'extendedTextMessage') {
+  const text = content?.conversation || content?.extendedTextMessage?.text || ''
+  console.log('Teks:', text)
+}
+```
+
+### Image Message
+
+```js
+if (type === 'imageMessage') {
+  const caption = content.imageMessage.caption || ''
+  const mimetype = content.imageMessage.mimetype // 'image/jpeg'
+  console.log('Gambar diterima, caption:', caption)
+}
+```
+
+### Video Message
+
+```js
+if (type === 'videoMessage') {
+  const caption = content.videoMessage.caption || ''
+  const seconds = content.videoMessage.seconds // durasi
+  console.log('Video diterima, caption:', caption)
+}
+```
+
+### Audio Message
+
+```js
+if (type === 'audioMessage') {
+  const isVoiceNote = content.audioMessage.ptt === true
+  const seconds = content.audioMessage.seconds
+  console.log(isVoiceNote ? 'Voice note' : 'Audio', 'durasi:', seconds, 'detik')
+}
+```
+
+### Document Message
+
+```js
+if (type === 'documentMessage') {
+  const fileName = content.documentMessage.fileName || 'unknown'
+  const mimetype = content.documentMessage.mimetype
+  const caption = content.documentMessage.caption || ''
+  console.log('Dokumen:', fileName, '|', mimetype)
+}
+```
+
+### Sticker Message
+
+```js
+if (type === 'stickerMessage') {
+  const isAnimated = content.stickerMessage.isAnimated
+  const isLottie = content.stickerMessage.isLottie
+  console.log('Stiker diterima, animasi:', isAnimated)
+}
+```
+
+### Location Message
+
+```js
+if (type === 'locationMessage') {
+  const { degreesLatitude, degreesLongitude, name, address } = content.locationMessage
+  console.log(`Lokasi: ${name} — ${degreesLatitude}, ${degreesLongitude}`)
+}
+```
+
+### Contact Message
+
+```js
+if (type === 'contactMessage') {
+  const { displayName, vcard } = content.contactMessage
+  console.log('Kontak:', displayName)
+  console.log('vCard:', vcard)
+}
+```
+
+### Poll Message
+
+```js
+if (
+  type === 'pollCreationMessage' ||
+  type === 'pollCreationMessageV2' ||
+  type === 'pollCreationMessageV3'
+) {
+  const poll = content[type]
+  const name = poll.name
+  const options = poll.options.map(o => o.optionName)
+  console.log('Poll:', name, '| Opsi:', options)
+}
+```
+
+### Buttons Response Message
+
+```js
+// Saat user memilih dari Buttons Message
+if (type === 'buttonsResponseMessage') {
+  const selectedId = content.buttonsResponseMessage.selectedButtonId
+  const selectedText = content.buttonsResponseMessage.selectedDisplayText
+  console.log(`Tombol dipilih: [${selectedId}] ${selectedText}`)
+}
+```
+
+### List Response Message
+
+```js
+// Saat user memilih dari List / Select Menu
+if (type === 'listResponseMessage') {
+  const rowId = content.listResponseMessage.singleSelectReply.selectedRowId
+  const title = content.listResponseMessage.title
+  console.log(`List dipilih: [${rowId}] ${title}`)
+}
+```
+
+### Template Button Reply Message
+
+```js
+// Saat user memilih dari Template Buttons
+if (type === 'templateButtonReplyMessage') {
+  const selectedId = content.templateButtonReplyMessage.selectedId
+  const selectedText = content.templateButtonReplyMessage.selectedDisplayText
+  console.log(`Template dipilih: [${selectedId}] ${selectedText}`)
+}
+```
+
+### Interactive Response Message
+
+```js
+// Saat user memilih dari Interactive / Flow Buttons
+if (type === 'interactiveResponseMessage') {
+  const raw = content.interactiveResponseMessage?.nativeFlowResponseMessage?.paramsJson
+  const parsed = raw ? JSON.parse(raw) : {}
+  const selectedId = parsed.id
+  console.log('Interaktif dipilih:', parsed)
+}
+```
+
+---
+
+### Deteksi Pesan Reply (Quoted)
+
+```js
+sock.ev.on('messages.upsert', async ({ messages }) => {
+  const msg = messages[0]
+  if (!msg?.message) return
+
+  const content = normalizeMessageContent(msg.message)
+
+  // contextInfo ada di dalam tipe pesan terkait
+  const contextInfo =
+    content?.extendedTextMessage?.contextInfo ||
+    content?.imageMessage?.contextInfo ||
+    content?.videoMessage?.contextInfo ||
+    null
+
+  if (contextInfo?.quotedMessage) {
+    const quotedContent = normalizeMessageContent(contextInfo.quotedMessage)
+    const quotedType = getContentType(quotedContent)
+    const quotedText =
+      quotedContent?.conversation ||
+      quotedContent?.extendedTextMessage?.text ||
+      quotedContent?.imageMessage?.caption || ''
+
+    console.log(`Pesan ini reply ke [${quotedType}]: ${quotedText}`)
+  }
+})
+```
+
+---
+
+### Download Media dari Pesan
+
+Bisa digunakan untuk `imageMessage`, `videoMessage`, `audioMessage`, `stickerMessage`, `documentMessage`.
+
+```js
+sock.ev.on('messages.upsert', async ({ messages }) => {
+  const msg = messages[0]
+  if (!msg?.message) return
+
+  const buffer = await downloadMediaMessage(
+    msg,
+    'buffer', // atau 'stream'
+    {},
+    {
+      logger,
+      reuploadRequest: sock.updateMediaMessage,
+    }
+  )
+  console.log('Media didownload, ukuran:', buffer.length, 'bytes')
 })
 ```
 
@@ -709,7 +939,7 @@ import {
 
 Fitur **AI Rich Response** yang tersedia di package ini — mulai dari `richMessage`, `sendTable`, `sendCodeBlock`, hingga seluruh ekosistem unified response — dibangun di atas fondasi luar biasa yang diciptakan oleh **Nixel** melalui proyeknya **NIXCODE MessageBuilder**.
 
-Library NIXCODE adalah karya yang benar-benar melampaui batas kemampuan standar Baileys. Arsitektur fluent chaining-nya, sistem `extractIE` untuk parsing hyperlink/citation/latex secara inline, `Toolkit` class yang elegan, hingga dukungan multi-format media — semua itu adalah hasil kerja keras, riset mendalam, dan dedikasi tinggi yang patut diacungi jempol. Tanpa fondasi ini, fitur-fitur rich response di `@gara31/void-baileys` tidak akan pernah ada.
+Library NIXCODE adalah karya yang benar-benar melampaui batas kemampuan standar Baileys. Arsitektur fluent chaining-nya, sistem `extractIE` untuk parsing hyperlink/citation/latex secara inline, `Toolkit` class yang elegan, hingga dukungan multi-format media — semua itu adalah hasil kerja keras, riset mendalam, dan dedikasi tinggi yang patut diacungi. Tanpa fondasi ini, fitur-fitur rich response di `@gara31/void-baileys` tidak akan pernah ada.
 
 Terima kasih banyak, **Nixel** — karyamu bukan sekadar library, tapi sebuah kontribusi nyata bagi komunitas developer WhatsApp bot Indonesia. 🙏
 
