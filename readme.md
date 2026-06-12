@@ -559,6 +559,323 @@ await sock.sendMessage(jid, {
 })
 ```
 
+### Pack Sticker (Sticker Pack)
+
+Kirim koleksi stiker dalam satu pack — bisa dari URL, buffer, atau file lokal.
+
+```js
+// Dari URL
+await sock.sendMessage(jid, {
+  stickerPackMessage: {
+    name: 'Pack Keren',
+    publisher: 'gara31',
+    stickers: [
+      { url: 'https://example.com/stiker1.webp', emojis: ['😂'] },
+      { url: 'https://example.com/stiker2.webp', emojis: ['🔥'] },
+      { url: 'https://example.com/stiker3.gif',  emojis: ['✨'], isAnimated: true },
+    ],
+  },
+})
+
+// Dari Buffer
+import { readFile } from 'fs/promises'
+const buf1 = await readFile('./stiker1.webp')
+const buf2 = await readFile('./stiker2.webp')
+
+await sock.sendMessage(jid, {
+  stickerPackMessage: {
+    name: 'Pack Lokal',
+    publisher: 'Bot Ku',
+    trayIcon: './tray.png', // opsional, ikon kecil pack (96x96)
+    stickers: [
+      { buffer: buf1, emojis: ['😎'] },
+      { buffer: buf2, emojis: ['💯'], isAnimated: false },
+    ],
+  },
+})
+```
+
+### PTV (Push-to-Video / Video Note)
+
+Kirim video berbentuk lingkaran seperti video note Telegram.
+
+```js
+await sock.sendMessage(jid, {
+  video: { url: './video.mp4' },
+  ptv: true,
+})
+```
+
+### Share / Request Nomor Telepon
+
+```js
+// Bagikan nomor telepon kamu ke lawan chat
+await sock.sendMessage(jid, { sharePhoneNumber: true })
+
+// Minta nomor telepon lawan chat
+await sock.sendMessage(jid, { requestPhoneNumber: true })
+```
+
+### Keep in Chat (Simpan Pesan)
+
+```js
+await sock.sendMessage(jid, {
+  keep: {
+    key: msg.key,   // key pesan yang ingin disimpan
+    type: 1,        // 1 = simpan, 2 = hapus dari simpan
+  },
+})
+```
+
+### Pin Pesan
+
+```js
+// Pin pesan selama 24 jam (86400 detik)
+await sock.sendMessage(jid, {
+  pin: msg.key,
+  type: 1,         // 1 = pin, 2 = unpin
+  time: 86400,     // durasi pin dalam detik (untuk pin)
+})
+```
+
+### Limit Sharing (Batasi Forward)
+
+```js
+await sock.sendMessage(jid, {
+  limitSharing: true,  // true = batasi, false = lepas batasan
+})
+```
+
+### Scheduled Call (Jadwalkan Panggilan)
+
+```js
+await sock.sendMessage(jid, {
+  call: {
+    name: 'Meeting Mingguan',
+    time: Date.now() + 3600_000, // 1 jam dari sekarang (ms)
+    type: 1,   // 1 = audio, 2 = video
+  },
+})
+```
+
+### Group Invite (Undangan Grup)
+
+```js
+await sock.sendMessage(jid, {
+  groupInvite: {
+    jid: '120363xxxxxx@g.us',
+    code: 'ABCDEFGH',          // kode invite
+    name: 'Grup Saya',
+    caption: 'Gabung yuk!',
+    expiration: Math.floor(Date.now() / 1000) + 86400, // expired besok
+  },
+})
+```
+
+### Newsletter Admin Invite
+
+```js
+await sock.sendMessage(jid, {
+  adminInvite: {
+    jid: '120363xxxxxx@newsletter',
+    name: 'Saluran Saya',
+    caption: 'Jadi admin yuk!',
+    expiration: Math.floor(Date.now() / 1000) + 86400,
+  },
+})
+```
+
+### Payment Invite
+
+```js
+await sock.sendMessage(jid, {
+  paymentInvite: {
+    type: 2,           // tipe layanan pembayaran
+    expiry: 0,
+  },
+})
+```
+
+### Order Status
+
+```js
+await sock.sendMessage(jid, {
+  orderStatus: {
+    title: 'Status Pesanan',
+    text: 'Pesanan kamu sedang diproses.',
+    footer: 'Terima kasih sudah belanja!',
+    image: './order-banner.jpg',  // wajib ada
+    referenceId: 'ORD-20240001',
+    status: 'PROCESSING',         // PROCESSING | COMPLETED | CANCELLED
+    subtotalValue: 50000,
+    subtotalOffset: 100,
+    taxValue: 5000,
+    taxOffset: 100,
+    currency: 'IDR',
+  },
+})
+```
+
+### Event Message
+
+```js
+await sock.sendMessage(jid, {
+  event: {
+    name: 'Meetup Developer',
+    description: 'Kumpul bareng developer lokal!',
+    startDate: new Date('2025-08-01T10:00:00+07:00'),
+    endDate: new Date('2025-08-01T13:00:00+07:00'),
+    location: 'Jakarta, Indonesia',
+    extraGuestsAllowed: true,
+    isCancelled: false,
+  },
+})
+```
+
+### Poll Result Snapshot
+
+```js
+await sock.sendMessage(jid, {
+  pollResult: {
+    name: 'Hasil Vote Bahasa Favorit',
+    values: [
+      ['JavaScript', 42],
+      ['Python', 38],
+      ['Go', 20],
+    ],
+  },
+})
+```
+
+### Native Flow Message (Tombol Fleksibel)
+
+Versi fleksibel dari interactiveMessage dengan berbagai tipe tombol.
+
+```js
+// Tombol reply + URL + copy code
+await sock.sendMessage(jid, {
+  nativeFlowMessage: {
+    title: 'Pilih Aksi',
+    body: 'Silakan pilih salah satu opsi di bawah ini.',
+    footer: 'Powered by Void',
+    buttons: [
+      { type: 'reply', text: 'Menu Utama', id: 'menu' },
+      { type: 'url',   text: 'Website',    url: 'https://example.com' },
+      { type: 'copy',  text: 'Salin Kode', code: 'PROMO2025' },
+      { type: 'call',  text: 'Hubungi',    id: 'call_cs' },
+    ],
+  },
+})
+
+// Dengan header gambar
+await sock.sendMessage(jid, {
+  nativeFlowMessage: {
+    title: 'Flash Sale!',
+    body: 'Diskon 50% hari ini saja.',
+    footer: 'Berlaku hingga tengah malam',
+    image: 'https://example.com/banner.jpg',
+    buttons: [
+      { type: 'reply', text: 'Beli Sekarang', id: 'buy' },
+      { type: 'url',   text: 'Lihat Katalog', url: 'https://example.com/katalog' },
+    ],
+  },
+})
+```
+
+### Carousel Message
+
+```js
+await sock.sendMessage(jid, {
+  carouselMessage: {
+    body: 'Pilih produk favoritmu!',
+    footer: 'Swipe untuk lihat lebih banyak',
+    cards: [
+      {
+        title: 'Produk A',
+        body: 'Deskripsi produk A yang keren.',
+        footer: 'Rp 99.000',
+        image: 'https://example.com/produk-a.jpg',
+        buttons: [
+          { type: 'reply', text: 'Pilih Produk A', id: 'produk_a' },
+          { type: 'url',   text: 'Detail', url: 'https://example.com/a' },
+        ],
+      },
+      {
+        title: 'Produk B',
+        body: 'Deskripsi produk B yang lebih keren.',
+        footer: 'Rp 149.000',
+        image: 'https://example.com/produk-b.jpg',
+        buttons: [
+          { type: 'reply', text: 'Pilih Produk B', id: 'produk_b' },
+          { type: 'url',   text: 'Detail', url: 'https://example.com/b' },
+        ],
+      },
+    ],
+  },
+})
+```
+
+### Cards (Carousel dengan helper)
+
+```js
+// Helper shorthand untuk carousel
+await sock.sendMessage(jid, {
+  cards: [
+    {
+      title: 'Item 1',
+      body: 'Deskripsi item 1',
+      footer: 'Rp 50.000',
+      image: { url: 'https://example.com/img1.jpg' },
+      buttons: [{ name: 'quick_reply', buttonParamsJson: JSON.stringify({ display_text: 'Pilih', id: 'item1' }) }],
+    },
+    {
+      title: 'Item 2',
+      body: 'Deskripsi item 2',
+      footer: 'Rp 75.000',
+      video: { url: 'https://example.com/video2.mp4' },
+      buttons: [{ name: 'quick_reply', buttonParamsJson: JSON.stringify({ display_text: 'Pilih', id: 'item2' }) }],
+    },
+  ],
+  text: 'Pilih item berikut:',
+  footer: 'Void Shop',
+})
+```
+
+### Button Reply (Balas Tombol secara Programatis)
+
+```js
+// Balas list
+await sock.sendMessage(jid, {
+  buttonReply: { title: 'Game', rowId: '.kuis' },
+  type: 'list',
+})
+
+// Balas template button
+await sock.sendMessage(jid, {
+  buttonReply: { displayText: 'Konfirmasi', id: 'btn_confirm', index: 0 },
+  type: 'template',
+})
+
+// Balas plain button
+await sock.sendMessage(jid, {
+  buttonReply: { id: 'btn_ok', displayText: 'OK' },
+  type: 'plain',
+})
+
+// Balas interactive/flow button
+await sock.sendMessage(jid, {
+  buttonReply: {
+    displayText: 'Menu',
+    nativeFlows: {
+      name: 'quick_reply',
+      paramsJson: JSON.stringify({ id: 'menu' }),
+      version: '1',
+    },
+  },
+  type: 'interactive',
+})
+```
+
 ### Pesan Interaktif
 
 ```js
@@ -611,18 +928,6 @@ await sock.sendMessage(jid, {
     ],
     header: 'Menu Bot',
   },
-})
-```
-
-### Album Messages
-
-```js
-await sock.sendMessage(jid, {
-  albumMessage: [
-    { image: { url: './foto1.jpg' }, caption: 'Pertama' },
-    { image: { url: './foto2.jpg' }, caption: 'Kedua' },
-    { video: { url: './klip.mp4' }, caption: 'Video' },
-  ],
 })
 ```
 
