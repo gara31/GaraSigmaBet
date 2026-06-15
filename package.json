@@ -1,11 +1,11 @@
 {
   "name": "@gara31/void-baileys",
-  "version": "3.0.1",
+  "version": "3.0.2",
   "author": "gara31",
   "license": "MIT",
   "type": "module",
   "main": "lib/index.js",
-  "description": "Modded Baileys v7 — Interactive Messages, Album, AI Rich Response & More",
+  "description": "Modded Baileys v7 — Interactive Messages, AI Rich Response & More",
   "keywords": [
     "whatsapp",
     "whatsapp-api",
