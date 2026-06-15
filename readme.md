@@ -4,7 +4,7 @@
 
 # @gara31/void-baileys
 
-### Modded Baileys v7 — Pesan Interaktif, Album, AI Rich Response & Lebih
+### Modded Baileys v7 — Pesan Interaktif, AI Rich Response & More
 
 [![npm version](https://img.shields.io/npm/v/@gara31/void-baileys?color=CB3837&logo=npm&logoColor=white&style=for-the-badge)](https://www.npmjs.com/package/@gara31/void-baileys)
 [![npm downloads](https://img.shields.io/npm/dm/@gara31/void-baileys?color=CB3837&logo=npm&logoColor=white&style=for-the-badge)](https://www.npmjs.com/package/@gara31/void-baileys)
