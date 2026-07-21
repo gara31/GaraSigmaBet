@@ -1,7 +1,7 @@
 {
   "name": "@gara31/void-baileys",
   "type": "module",
-  "version": "3.1.0",
+  "version": "3.0.9",
   "description": "Gara Custom Baileys - Full Button Support. Rebuilt on top of official @whiskeysockets/baileys 7.0.0-rc13 core, pure JS (no .d.ts / .map files), with the interactive & rich-message content types (buttons, lists, carousel, cards, shop/collection, native flow, AI rich response, sticker packs, admin invite, payments, etc.).",
   "keywords": [
     "whatsapp",
