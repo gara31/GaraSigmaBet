@@ -16,6 +16,9 @@
   "license": "MIT",
   "author": "kanaraa",
   "main": "lib/index.js",
+  "publishConfig": {
+    "access": "public"
+  },
   "files": [
     "lib/**/*",
     "WAProto/**/*",
