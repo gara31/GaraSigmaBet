@@ -1,13 +1,13 @@
 <div align="center">
 
-<img src="https://c.termai.cc/i135/QkXlhm4.jpg" alt="void-baileys banner" width="100%" />
+<img src="https://c.termai.cc/i135/QkXlhm4.jpg" alt="kanaraa-baileys banner" width="100%" />
 
-# @gara31/void-baileys
+# @kanaraa/baileys
 
 ### Modded Baileys v7 — Pesan Interaktif, AI Rich Response & More
 
-[![npm version](https://img.shields.io/npm/v/@gara31/void-baileys?color=CB3837&logo=npm&logoColor=white&style=for-the-badge)](https://www.npmjs.com/package/@gara31/void-baileys)
-[![npm downloads](https://img.shields.io/npm/dm/@gara31/void-baileys?color=CB3837&logo=npm&logoColor=white&style=for-the-badge)](https://www.npmjs.com/package/@gara31/void-baileys)
+[![npm version](https://img.shields.io/npm/v/@kanaraa/baileys?color=CB3837&logo=npm&logoColor=white&style=for-the-badge)](https://www.npmjs.com/package/@kanaraa/baileys)
+[![npm downloads](https://img.shields.io/npm/dm/@kanaraa/baileys?color=CB3837&logo=npm&logoColor=white&style=for-the-badge)](https://www.npmjs.com/package/@kanaraa/baileys)
 [![ESM](https://img.shields.io/badge/ESM-only-F7DF1E?logo=javascript&logoColor=black&style=for-the-badge)](#)
 
 ---
@@ -15,7 +15,7 @@
 **Build modifikasi dari [WhiskeySockets/Baileys](https://github.com/WhiskeySockets/Baileys)**
 dengan dukungan native untuk pesan interaktif, album, AI rich response, newsletter, status mention, dan berbagai utilitas tambahan.
 
-Package ini adalah **distribusi/build repo** untuk `@gara31/void-baileys`.
+Package ini adalah **distribusi/build repo** untuk `@kanaraa/baileys`.
 Berisi file runtime yang sudah dikompilasi di `lib/` dan protobuf di `WAProto/`, dirancang untuk digunakan langsung dari npm.
 
 </div>
@@ -62,7 +62,7 @@ Berisi file runtime yang sudah dikompilasi di `lib/` dan protobuf di `WAProto/`,
 - Auth store persisten untuk penggunaan produksi
 - Opsional: `pino`, `qrcode-terminal`, `sharp`, `jimp`
 
-> **Penting:** `@gara31/void-baileys` hanya mendukung ESM. Proyek CommonJS perlu migrasi atau dynamic import wrapper.
+> **Penting:** `@kanaraa/baileys` hanya mendukung ESM. Proyek CommonJS perlu migrasi atau dynamic import wrapper.
 
 ---
 
@@ -81,7 +81,7 @@ Berisi file runtime yang sudah dikompilasi di `lib/` dan protobuf di `WAProto/`,
 ### Via Terminal (langsung)
 
 ```bash
-npm install @gara31/void-baileys
+npm install @kanaraa/baileys
 ```
 
 Package pendamping yang disarankan:
@@ -98,7 +98,7 @@ Jika proyekmu menggunakan fork dari `@whiskeysockets/baileys` atau `@adiwajshing
 ```json
 {
   "dependencies": {
-    "@whiskeysockets/baileys": "npm:@gara31/void-baileys"
+    "@whiskeysockets/baileys": "npm:@kanaraa/baileys"
   }
 }
 ```
@@ -107,7 +107,7 @@ Jika proyekmu menggunakan fork dari `@whiskeysockets/baileys` atau `@adiwajshing
 ```json
 {
   "dependencies": {
-    "@adiwajshing/baileys": "npm:@gara31/void-baileys"
+    "@adiwajshing/baileys": "npm:@kanaraa/baileys"
   }
 }
 ```
@@ -121,7 +121,7 @@ npm install
 ### Via Terminal — Non Fork (alias custom)
 
 ```bash
-npm install void-bail@npm:@gara31/void-baileys
+npm install kanaraa-bail@npm:@kanaraa/baileys
 ```
 
 ### Menggunakan Alias (generic)
@@ -131,7 +131,7 @@ Tambahkan ke `package.json`:
 ```json
 {
   "dependencies": {
-    "baileys": "npm:@gara31/void-baileys@latest"
+    "baileys": "npm:@kanaraa/baileys@latest"
   }
 }
 ```
@@ -160,7 +160,7 @@ Pastikan `package.json` memiliki `"type": "module"`:
   "name": "bot-ku",
   "type": "module",
   "dependencies": {
-    "baileys": "npm:@gara31/void-baileys@latest"
+    "baileys": "npm:@kanaraa/baileys@latest"
   }
 }
 ```
@@ -168,7 +168,7 @@ Pastikan `package.json` memiliki `"type": "module"`:
 ### 2. Install Dependensi
 
 ```bash
-npm install @gara31/void-baileys pino qrcode-terminal
+npm install @kanaraa/baileys pino qrcode-terminal
 ```
 
 ### 3. Buat `index.js`
@@ -178,7 +178,7 @@ import makeWASocket, {
   useMultiFileAuthState,
   DisconnectReason,
   Browsers,
-} from '@gara31/void-baileys'
+} from '@kanaraa/baileys'
 import pino from 'pino'
 import qrcode from 'qrcode-terminal'
 
@@ -261,7 +261,7 @@ import {
   getContentType,
   normalizeMessageContent,
   downloadMediaMessage,
-} from '@gara31/void-baileys'
+} from '@kanaraa/baileys'
 
 sock.ev.on('messages.upsert', async ({ messages }) => {
   const msg = messages[0]
@@ -565,7 +565,7 @@ Kirim koleksi stiker dalam satu pack — bisa dari URL, buffer, atau file lokal.
 await sock.sendMessage(jid, {
   stickerPackMessage: {
     name: 'Pack Keren',
-    publisher: 'gara31',
+    publisher: 'kanaraa',
     stickers: [
       { url: 'https://example.com/stiker1.webp', emojis: ['😂'] },
       { url: 'https://example.com/stiker2.webp', emojis: ['🔥'] },
@@ -831,7 +831,7 @@ lalu kirim pakai `relayMessage`. Ini juga jalur yang sama dipakai `sock.sendMess
 layar, jadi hasilnya konsisten.
 
 ```js
-const { generateWAMessageFromContent } = await import('@gara31/void-baileys')
+const { generateWAMessageFromContent } = await import('@kanaraa/baileys')
 
 const msg = generateWAMessageFromContent(
   jid,
@@ -906,7 +906,7 @@ Pola yang sama juga bisa dipakai buat gabung beberapa jenis tombol native flow s
 satu pesan, di luar cara shorthand `type`/`text` yang sudah dibahas di atas:
 
 ```js
-const { generateWAMessageFromContent } = await import('@gara31/void-baileys')
+const { generateWAMessageFromContent } = await import('@kanaraa/baileys')
 
 const msg = generateWAMessageFromContent(
   jid,
@@ -926,11 +926,11 @@ const msg = generateWAMessageFromContent(
               },
               {
                 name: 'cta_url',
-                buttonParamsJson: JSON.stringify({ display_text: '\u0000', url: 'https://github.com/gara31', merchant_url: 'https://github.com/gara31', icon: 'REVIEW' })
+                buttonParamsJson: JSON.stringify({ display_text: '\u0000', url: 'https://github.com/kanaraa', merchant_url: 'https://github.com/kanaraa', icon: 'REVIEW' })
               },
               {
                 name: 'cta_copy',
-                buttonParamsJson: JSON.stringify({ display_text: '\u0000', copy_code: 'VOID2025', icon: 'DEFAULT' })
+                buttonParamsJson: JSON.stringify({ display_text: '\u0000', copy_code: 'KANARAA2025', icon: 'DEFAULT' })
               },
             ],
             messageParamsJson: '{}',
@@ -1026,7 +1026,7 @@ await sock.sendMessage(jid, {
     },
   ],
   text: 'Pilih item berikut:',
-  footer: 'Void Shop',
+  footer: 'Kanaraa Shop',
 })
 ```
 
@@ -1072,7 +1072,7 @@ await sock.sendMessage(jid, {
 await sock.sendMessage(jid, {
   interactiveMessage: {
     title: 'Selamat Datang!',
-    footer: 'Powered by Void',
+    footer: 'Powered by Kanaraa',
     buttons: [
       {
         name: 'quick_reply',
@@ -1097,7 +1097,7 @@ await sock.sendMessage(jid, {
 await sock.sendMessage(jid, {
   interactiveMessage: {
     title: 'Pilih Kategori',
-    footer: 'Powered by Void',
+    footer: 'Powered by Kanaraa',
     buttons: [
       {
         name: 'single_select',
@@ -1142,12 +1142,12 @@ await sock.sendList(
   jid,
   'Info Bot',
   [
-    ['Nama', 'Void AI'],
+    ['Nama', 'Kanaraa AI'],
     ['Versi', '7.0.0'],
-    ['Developer', 'gara31'],
+    ['Developer', 'kanaraa'],
   ],
   quoted,
-  { footer: '© Void AI' }
+  { footer: '© Kanaraa AI' }
 )
 
 // Code Block
@@ -1157,12 +1157,12 @@ await sock.sendCodeBlock(
 function kataSalam(nama) {
     return salam + " " + nama
 }
-kataSalam("Void")`,
+kataSalam("Kanaraa")`,
   quoted,
   {
     language: 'javascript',
     title: 'Contoh Kode',
-    footer: 'Powered by Void',
+    footer: 'Powered by Kanaraa',
   }
 )
 ```
@@ -1232,7 +1232,7 @@ await sock.sendMessage(jid, {
   richMessage: {
     title: 'vøid',
     source: [
-      ['https://example.com/favicon.jpg', 'https://github.com/gara31/', 'GitHub'],
+      ['https://example.com/favicon.jpg', 'https://github.com/kanaraa/', 'GitHub'],
       ['https://example.com/favicon.jpg', 'https://example.com/', 'Website'],
     ],
   }
@@ -1317,7 +1317,7 @@ await sock.sendMessage(jid, {
     title: 'vøid',
     video: 'https://example.com/video.mp4|10',
     tip: 'Ini adalah text tip',
-    suggest: ['gara', 'void', 'yuuki'],
+    suggest: ['gara', 'kanaraa', 'yuuki'],
     text: `- [Beli Script](https://wa.me/628xxx)\n- [Sewa Bot](https://wa.me/628xxx)\n- [Support](https://wa.me/628xxx)`,
   }
 }, { quoted: m })
@@ -1418,9 +1418,9 @@ import {
   // Koneksi
   DisconnectReason,
   Browsers,
-} from '@gara31/void-baileys'
+} from '@kanaraa/baileys'
 ```
 
 ---
 
-Repo dan seluruh kode di dalamnya dikelola oleh gara31. Gunakan sesuai kebutuhan proyekmu sendiri, dan pastikan penggunaannya tetap mengikuti Syarat Layanan WhatsApp.
+Repo dan seluruh kode di dalamnya dikelola oleh kanaraa. Gunakan sesuai kebutuhan proyekmu sendiri, dan pastikan penggunaannya tetap mengikuti Syarat Layanan WhatsApp.

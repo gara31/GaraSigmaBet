@@ -1,5 +1,5 @@
 {
-  "name": "@kanara/baileys",
+  "name": "@kanaraa/baileys",
   "type": "module",
   "version": "3.1.7",
   "description": "Modded Baileys v7, Rebuilt on top of official @whiskeysockets/baileys 7.0.0-rc13, with the interactive & rich-message content types (buttons, lists, carousel, cards, shop/collection, native flow, AI rich response, sticker packs, admin invite, payments, etc.).",
@@ -12,9 +12,9 @@
     "interactive-messages",
     "rich-response"
   ],
-  "homepage": "https://github.com/gara31/GaraSigmaBet",
+  "homepage": "https://github.com/kanaraa/GaraSigmaBet",
   "license": "MIT",
-  "author": "gara31",
+  "author": "kanaraa",
   "main": "lib/index.js",
   "files": [
     "lib/**/*",
