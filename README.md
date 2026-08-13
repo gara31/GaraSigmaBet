@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://c.termai.cc/i135/QkXlhm4.jpg" alt="kanaraa-baileys banner" width="100%" />
+<img src="https://c.termai.cc/i137/k9rWBpx.jpg" alt="kanaraa-baileys banner" width="100%" />
 
 # @kanaraa/baileys
 
