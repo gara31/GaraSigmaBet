@@ -1,7 +1,7 @@
 {
   "name": "@kanaraa/baileys",
   "type": "module",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "Modded Baileys v7, Rebuilt on top of official @whiskeysockets/baileys 7.0.0-rc13, with the interactive & rich-message content types (buttons, lists, carousel, cards, shop/collection, native flow, AI rich response, sticker packs, admin invite, payments, etc.).",
   "keywords": [
     "whatsapp",
@@ -43,10 +43,9 @@
   "peerDependencies": {
     "adm-zip": "^0.5.10",
     "audio-decode": "^2.1.3",
-    "fluent-ffmpeg": "^2.1.2",
+    "fluent-ffmpeg": "^2.1.3",
     "jimp": "^1.6.1",
-    "link-preview-js": "^3.0.0",
-    "sharp": "*"
+    "sharp": "^0.35.3"
   },
   "peerDependenciesMeta": {
     "adm-zip": {
@@ -59,9 +58,6 @@
       "optional": true
     },
     "jimp": {
-      "optional": true
-    },
-    "link-preview-js": {
       "optional": true
     },
     "sharp": {
