@@ -2678,12 +2678,19 @@ message Message {
         optional Footer footer = 3;
         optional ContextInfo contextInfo = 15;
         optional UrlTrackingMap urlTrackingMap = 16;
+        optional Message.InteractiveMessage.BloksWidget bloksWidget = 8;
         oneof interactiveMessage {
             Message.InteractiveMessage.ShopMessage shopStorefrontMessage = 4;
             Message.InteractiveMessage.CollectionMessage collectionMessage = 5;
             Message.InteractiveMessage.NativeFlowMessage nativeFlowMessage = 6;
             Message.InteractiveMessage.CarouselMessage carouselMessage = 7;
         }
+        message BloksWidget {
+            optional string uuid = 1;
+            optional string data = 2;
+            optional string type = 3;
+        }
+
         message Body {
             optional string text = 1;
         }
