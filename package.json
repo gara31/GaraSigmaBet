@@ -1,7 +1,7 @@
 {
   "name": "@kanaraa/baileys",
   "type": "module",
-  "version": "3.4.4",
+  "version": "3.4.5",
   "description": "Modded Baileys v7, Rebuilt on top of official @whiskeysockets/baileys 7.0.0-rc13, with the interactive & rich-message content types (buttons, lists, carousel, cards, shop/collection, native flow, AI rich response, sticker packs, admin invite, payments, etc.).",
   "keywords": [
     "whatsapp",
