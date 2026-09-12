@@ -1323,6 +1323,14 @@ await sock.sendMessage(jid, {
 }, { quoted: m })
 ```
 
+// Game (Embedded HTML WebView / Mini App)
+await sock.sendMessage(jid, {
+  richMessage: {
+    game: 'Popioo:*Click Me*',
+    html: '<h1>Game HTML</h1>',
+  }
+}, { quoted: m })
+
 ### Metode Newsletter
 
 ```js
