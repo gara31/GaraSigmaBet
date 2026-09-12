@@ -1321,15 +1321,33 @@ await sock.sendMessage(jid, {
     text: `- [Beli Script](https://wa.me/628xxx)\n- [Sewa Bot](https://wa.me/628xxx)\n- [Support](https://wa.me/628xxx)`,
   }
 }, { quoted: m })
-```
 
-// Game (Embedded HTML WebView / Mini App)
+// Footer Action / Click Button
 await sock.sendMessage(jid, {
   richMessage: {
-    game: '*Click to Play*',
-    html: '<h1>Game HTML</h1>',
+    title: 'vøid',
+    text: 'Halo, silakan klik tombol di bawah untuk info lebih lanjut:',
+    footerAction: {
+      text: 'Kunjungi Website',
+      url: 'https://kanara.my.id',
+    }
   }
 }, { quoted: m })
+
+// Game (Embedded HTML WebView / Mini App)
+// Catatan: nama/properti game bersifat opsional (default: '*Click to Play*')
+await sock.sendMessage(jid, {
+  richMessage: {
+    title: 'vøid',
+    game: 'Mainkan Game', // opsional: string judul pill tombol (atau tanpa 'game' jika hanya html)
+    html: `<!DOCTYPE html>
+<html>
+<head><title>Mini App</title></head>
+<body><h1>Hello World Game</h1></body>
+</html>`,
+  }
+}, { quoted: m })
+```
 
 ### Metode Newsletter
 
