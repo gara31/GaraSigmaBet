@@ -1326,7 +1326,7 @@ await sock.sendMessage(jid, {
 // Game (Embedded HTML WebView / Mini App)
 await sock.sendMessage(jid, {
   richMessage: {
-    game: 'Popioo:*Click Me*',
+    game: '*Click to Play*',
     html: '<h1>Game HTML</h1>',
   }
 }, { quoted: m })
